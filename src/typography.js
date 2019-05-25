@@ -1,39 +1,43 @@
 const _ = require('lodash')
 
 module.exports = ({ addComponents, theme }) => {
+  /**
+   * Tailwind Config Options
+   */
   const familyOpts = theme('gutenberg.fontFamily')
   const sizeOpts = _.omit(theme('gutenberg.fontSizes'), 'wpGenerated')
   const generatedSizeOpts = theme('gutenberg.fontSizes.wpGenerated')
 
+  /**
+   * Font Families
+   */
   const fonts = _.map(familyOpts, (value, key) => ({
     [`.wp-blocks ${key}:not([class^="font-"])`]: {
       fontFamily: `${value.map(font => (` ${font}`))}`,
     },
   }))
 
+  /**
+   * Font Sizes
+   */
   const sizes = _.map(sizeOpts, (value, key) => ({
     [`.wp-blocks ${key}:not([class^="font-"])`]: {
       fontSize: value,
     },
   }))
 
+  /**
+   * WordPress Generated Font Sizes
+   */
   const generatedFontSizes = _.map(generatedSizeOpts, (value, key) => ({
     [`.wp-blocks .has-${key}-font-size`]: {
       fontSize: value,
     },
   }))
 
-  const fontStyles = {
-    '.wp-blocks': {
-      [`h1:not([class^="font-"]),
-        h2:not([class^="font-"]),
-        h3:not([class^="font-"]),
-        h4:not([class^="font-"])`]: {
-        'textTransform': 'uppercase',
-      },
-    },
-  }
-
+  /**
+   * List styles
+   */
   const listStyles = {
     '.wp-blocks': {
       [`ol:not([class^="wp-block-"]),
@@ -61,7 +65,6 @@ module.exports = ({ addComponents, theme }) => {
     fonts,
     sizes,
     generatedFontSizes,
-    fontStyles,
     listStyles,
   ])
 }

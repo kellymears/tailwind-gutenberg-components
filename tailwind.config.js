@@ -108,12 +108,98 @@ module.exports = {
   },
   // ...
   plugins: [
-    require('./src/base'),
-    require('./src/columns'),
-    require('./src/typography'),
-    require('./src/colors'),
-    require('./src/image'),
-    require('./src/video'),
-    require('./src/block-cover'),
+
+    /**
+     * Tailwind/Gutenberg
+     *
+     * @link https://github.com/kellymears/tailwind-gutenberg-components
+     */
+
+    /**
+     * Container settings
+     *
+     * Required config keys:
+     *  `gutenberg.contentWidths`
+     *  `gutenberg.rowGap`
+     *  `gutenberg.screens`
+     */
+    require('./src/tailwind/tailwindcss-block-editor/container'),
+
+    /**
+     * Base typographic settings
+     *
+     * Required config keys:
+     *  `gutenberg.fontFamily`,
+     *  `gutenberg.fontSizes`,
+     *  `gutenberg.fontSizes.wpGenerated`,
+     */
+    require('./src/tailwind/tailwindcss-block-editor/typography'),
+
+    /**
+     * Base color settings
+     *
+     * Required config keys:
+     *  `gutenberg.colors`
+     */
+    require('./src/tailwind/tailwindcss-block-editor/colors'),
+
+    /**
+     * Aspect ratio utilities
+     *
+     * Currently bugged  😭
+     *
+     * I have no idea why the aspectRatios classes are not
+     * included in the compiled css
+     */
+    require('./src/tailwind/tailwindcss-block-editor/aspect-ratios'),
+
+    /**
+     * Supports columnar layouts
+     *
+     * Supports:
+     *  `wp-block-columns`
+     *  `wp-block-column`
+     *  `wp-block-group`
+     *
+     * Required config keys:
+     *  `gutenberg.screens`
+     *  `gutenberg.columnGap`
+     */
+    require('./src/tailwind/tailwindcss-block-editor/columns'),
+
+    /**
+     * Supports embed blocks
+     *
+     * Supports:
+     *  `wp-block-embed`
+     *
+     * Required config keys:
+     *  ``
+     */
+    require('./src/tailwind/tailwindcss-block-editor/block-embed'),
+
+    /**
+     * Supports image blocks
+     *
+     * Supports:
+     *  `wp-block-image`
+     *
+     * Required config keys:
+     *  `gutenberg.supports.wideAlignments`
+     *  `gutenberg.images`
+     *  `gutenberg.rowGap`
+     *  `gutenberg.columnGap`
+     */
+    require('./src/tailwind/tailwindcss-block-editor/block-image'),
+
+    /**
+     * #TODO Add docs
+     */
+    require('./src/tailwind/tailwindcss-block-editor/block-video'),
+
+    /**
+     * #TODO Add docs
+     */
+    require('./src/tailwind/tailwindcss-block-editor/block-cover'),
   ]
 }

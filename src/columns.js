@@ -16,39 +16,49 @@ const constructGridObject = () => {
 
 module.exports = ({addComponents, theme}) => {
 
-  const screens = theme('screens', {})
+  const screens = theme('gutenberg.screens')
+  const colGap = theme('gutenberg.columnGap')
   const gridTemplate = constructGridObject()
 
   const columns = gridTemplate.map(obj => ({
-    '.wp-block-columns, .is-grid': {
-      paddingLeft: '25px',
-      paddingRight: '25px',
+    ':not(.wp-block-group)': {
+      '.wp-block-columns, .is-grid': {
+        paddingLeft: colGap,
+        paddingRight: colGap,
 
-      // you're the new grid
-      '@supports (display: grid)': {
-        [obj.selector]: {
-          display: 'grid',
-          [`@media (min-width: ${screens.md})`]: {
-            'grid-template-columns': `repeat(${obj.count}, 1fr)`,
+        // you're the new grid
+        '@supports (display: grid)': {
+          [obj.selector]: {
+            display: 'grid',
+            [`@media (min-width: ${screens.md})`]: {
+              'grid-template-columns': `repeat(${obj.count}, 1fr)`,
+            },
+            'grid-column-gap': colGap,
           },
-          'grid-column-gap': '25px',
         },
-      },
 
-      // flex is jennifer aniston
-      '@supports not (display: grid)': {
-        [obj.selector]: {
-          display: 'flex',
-          flexWrap: 'no-wrap',
-          '> .wp-block-column': {
-            flex: 1,
+        // flex is jennifer aniston
+        '@supports not (display: grid)': {
+          [obj.selector]: {
+            display: 'flex',
+            flexWrap: 'no-wrap',
+            '> .wp-block-column': {
+              flex: 1,
+            },
           },
         },
       },
     },
   }))
 
+  const group = {
+    '.wp-block-group .wp-block-columns' : {
+      display: 'flex',
+    },
+  }
+
   addComponents([
     columns,
+    group,
   ])
 }
