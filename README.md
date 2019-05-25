@@ -21,7 +21,7 @@
 
 I'll try to build out a better roadmap once I've gotten a bit farther along with the initial work. For now if submitting a PR please try to:
 
-✅ **DO comment**
+✅ **DO keep the tailwind.config.js file well commented**
 
 Note above your module's require statement in `tailwind.config.js` what its general purpose is, what specific top-level classes (if any) it targets or supports, and what configuration keys are required if the module is included. Be as succint as possible and generally try to match the existing format.
 
@@ -68,10 +68,52 @@ images: {
 
 In your module avoid utilizing theme configuration values outside of the `theme.gutenberg` key.
 
+**Example:**
+
+```js
+  // 🚫 Bad
+  const cover = ({
+    '.wp-block-cover': {
+      paddingTop: theme('spacing.2xl'),
+    }
+  })
+
+  // 🤟🏽 Good
+  const options = theme('gutenberg.blocks.cover')
+  const cover = ({
+    '.wp-block-cover': {
+      paddingTop: options.verticalPadding,
+    }
+  })
+}
+```
+
+The one exception to utilizing `theme()` is when providing default values in `tailwind.config.js`, and in that case you should absolutely use it and preferably use a stock key.
+
 ### 🚫 **Do not assume config**
 
-Avoid otherwise making assumptions about the user's tailwind configuration. The one exception is providing default values in  `tailwind.config.js`, and you should try to make sure that you use sane tailwind defaults.
+Avoid otherwise making assumptions about the user's tailwind configuration. When in doubt define it explicitly.
 
 ### 🚫 **Do not hardcode opinionated values**
 
 I am still refactoring some of the hardcoded stuff out of my early scaffolding but all future work should utilize values from `theme.gutenberg`. If you feel that a configuration value is necessitated then you should make it, but it is obviously preferred to reuse existing config keys when appropriate.
+
+```js
+  // 🚫 Bad
+  const cover = ({
+    '.wp-block-cover': {
+      paddingTop: '2rem',
+    }
+  })
+
+  // 🤟🏽 Good
+  const options = theme('gutenberg.blocks.cover')
+  const cover = ({
+    '.wp-block-cover': {
+      paddingTop: options.verticalPadding,
+    }
+  })
+}
+```
+
+## Thanks!
