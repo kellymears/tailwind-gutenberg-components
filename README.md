@@ -21,7 +21,7 @@
 
 I'll try to build out a better roadmap once I've gotten a bit farther along with the initial work. For now if submitting a PR please try to:
 
-✅ **DO keep the tailwind.config.js file well commented**
+### ✅ **DO keep the tailwind.config.js file well commented**
 
 Note above your module's require statement in `tailwind.config.js` what its general purpose is, what specific top-level classes (if any) it targets or supports, and what configuration keys are required if the module is included. Be as succint as possible and generally try to match the existing format.
 
