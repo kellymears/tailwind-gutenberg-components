@@ -64,7 +64,7 @@ images: {
 },
 ```
 
-### 🚫 **Do not utilize theme() in your module code**
+### 🚫 **Do not utilize default theme() keys in your module code**
 
 In your module avoid utilizing theme configuration values outside of the `theme.gutenberg` key.
 
