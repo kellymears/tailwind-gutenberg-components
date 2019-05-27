@@ -186,12 +186,7 @@ module.exports = {
     require('./src/tailwind/tailwindcss-block-editor/colors'),
 
     /**
-     * Aspect ratio utilities
-     *
-     * Currently bugged  😭
-     *
-     * I have no idea why the aspectRatios classes are not
-     * included in the compiled css
+     * Supports responsive embeds
      */
     require('./src/tailwind/tailwindcss-block-editor/aspect-ratios'),
 

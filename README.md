@@ -14,6 +14,7 @@
 - `columns.js`
 - `container.js`
 - `typography.js`
+- `figcaption.js`
 
 ## Contributing
 
