@@ -1,6 +1,6 @@
 const _ = require('lodash')
 
-module.exports = ({addComponents, theme}) => {
+module.exports = ({ addComponents, theme }) => {
   const opts = theme('gutenberg')
   const specialAlignment = {
     '.wp-block-embed.alignfull, .wp-block-embed.alignwide': {
@@ -15,11 +15,6 @@ module.exports = ({addComponents, theme}) => {
         width: '100%',
         marginLeft: 'auto',
         marginRight: 'auto',
-      },
-
-      'figcaption': {
-        paddingTop: opts.rowGap,
-        textAlign: 'center',
       },
     },
   }

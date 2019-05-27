@@ -1,6 +1,4 @@
-const percent = (width, height) => {
-  return ((height/width)*100)
-}
+const percent = (dividend, divisor) => (dividend / divisor) * 100
 
 module.exports = ({ addComponents }) => {
   const ratios = [
@@ -13,26 +11,34 @@ module.exports = ({ addComponents }) => {
     [1, 2],
   ]
 
-  const base = {
+  const wrapper = {
     '.wp-block-embed__wrapper': {
       position: 'relative',
-    },
-    '.wp-block-embed__wrapper::before': {
-      display: 'block',
-      content: `''`,
+
+      'iframe': {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+      },
     },
   }
 
-  const aspectRatios = ratios.forEach(ratio => ({
-    [`.wp-embed-aspect-${ratio[0]}-${ratio[1]}`]: {
+  const aspectRatios = ratios.map(([w, h]) => ({
+    [`.wp-embed-aspect-${w}-${h}`]: {
       '.wp-block-embed__wrapper::before': {
-        paddingTop: percent(ratio[0], ratio[1]) + '%',
+        content: `''`,
+        display: 'block',
+        paddingTop: `${percent(w, h)}%`,
       },
     },
   }))
 
   addComponents([
-    base,
+    wrapper,
     aspectRatios,
   ])
 }

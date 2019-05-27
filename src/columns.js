@@ -8,13 +8,13 @@ const constructGridObject = () => {
     gridTemplate.push({
       'count': gridIteration,
       'selector': `&.has-${gridIteration}-columns`,
-    }) && gridIteration ++
+    }) && gridIteration++
   }
 
   return gridTemplate
 }
 
-module.exports = ({addComponents, theme}) => {
+module.exports = ({ addComponents, theme }) => {
 
   const screens = theme('gutenberg.screens')
   const colGap = theme('gutenberg.columnGap')
@@ -52,8 +52,14 @@ module.exports = ({addComponents, theme}) => {
   }))
 
   const group = {
-    '.wp-block-group .wp-block-columns' : {
-      display: 'flex',
+    '.wp-block-group': {
+      marginTop: 0,
+      marginBottom: 0,
+      paddingTop: theme('gutenberg.rowGap'),
+      paddingBottom: theme('gutenberg.rowGap'),
+      '.wp-block-columns': {
+        display: 'flex',
+      },
     },
   }
 

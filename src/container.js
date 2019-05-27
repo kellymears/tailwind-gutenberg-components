@@ -1,7 +1,7 @@
 const _ = require('lodash')
 
 module.exports = ({ addComponents, theme, e }) => {
-  const options  = theme('gutenberg')
+  const options = theme('gutenberg')
 
   const blockContainer = {
     '.wp-blocks > *:not(.alignwide):not(.alignfull)': {
@@ -32,13 +32,13 @@ module.exports = ({ addComponents, theme, e }) => {
       },
     },
 
-    '.wp-blocks > *[class^="wp-block-"]': {
-      marginTop:    options.rowGap.default,
+    '.wp-blocks > *': {
+      marginTop: options.rowGap.default,
       marginBottom: options.rowGap.default,
     },
 
     '.wp-blocks > .alignfull': {
-      marginTop:    options.rowGap.full,
+      marginTop: options.rowGap.full,
       marginBottom: options.rowGap.full,
 
       [`@media (max-width: ${options.screens.xs})`]: {
@@ -63,9 +63,9 @@ module.exports = ({ addComponents, theme, e }) => {
     },
 
     '.wp-blocks > .alignwide': {
-      marginLeft:   'auto',
-      marginRight:  'auto',
-      marginTop:    options.rowGap.wide,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: options.rowGap.wide,
       marginBottom: options.rowGap.wide,
 
       [`@media (max-width: ${options.screens.xs})`]: {

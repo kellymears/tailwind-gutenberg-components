@@ -188,7 +188,8 @@ module.exports = {
     /**
      * Aspect ratio utilities
      *
-     * #TODO: Currently bugged 😭
+     * Currently bugged  😭
+     *
      * I have no idea why the aspectRatios classes are not
      * included in the compiled css
      */
@@ -207,6 +208,18 @@ module.exports = {
      *  `gutenberg.columnGap`
      */
     require('./src/tailwind/tailwindcss-block-editor/columns'),
+
+    /**
+     * Supports figcaptions
+     *
+     * Required config keys:
+     *  `gutenberg.figCaption.align.left`
+     *  `gutenberg.figCaption.align.right`
+     *  `gutenberg.figCaption.align.center`
+     *  `gutenberg.figCaption.align.wide`
+     *  `gutenberg.figCaption.fontFamily`
+     */
+    require('./src/tailwind/tailwindcss-block-editor/figCaption'),
 
     /**
      * Supports embed blocks
