@@ -1,6 +1,4 @@
-const _ = require('lodash')
-
-module.exports = ({ addComponents, theme, e }) => {
+module.exports = ({ addComponents, theme }) => {
   const options = theme('gutenberg')
 
   const blockContainer = {
