@@ -1,4 +1,4 @@
-module.exports = ({ addComponents, theme }) => {
+module.exports = ({ addComponents }) => {
   const embeds = ({
   })
 

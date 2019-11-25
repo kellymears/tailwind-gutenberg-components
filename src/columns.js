@@ -1,5 +1,3 @@
-const _ = require('lodash')
-
 const constructGridObject = () => {
   var gridTemplate = []
   var gridIteration = 2

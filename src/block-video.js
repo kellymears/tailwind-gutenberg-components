@@ -1,5 +1,3 @@
-const _ = require('lodash')
-
 module.exports = ({ addComponents, theme }) => {
   const opts = theme('gutenberg')
   const specialAlignment = {
