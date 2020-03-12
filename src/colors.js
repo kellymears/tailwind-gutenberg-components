@@ -16,10 +16,6 @@ const opacities = [
   100,
 ]
 
-const mixColor = (color, opacity) => {
-  return chroma(color).alpha(opacity * 0.1).rgba()
-}
-
 /**
  * Colors
  */
