@@ -1,58 +1,56 @@
-
-// packages
+/** Modules */
 const _ = require('lodash')
 const chroma = require('chroma-js')
 
-// helpers
-const generateOpacities = () => {
-  let opacityIteration = 1,
-      opacities = [0]
-
-  while (opacityIteration < 10) {
-    opacities.push(`${opacityIteration}0`)
-    opacityIteration++
-  }
-
-  return opacities
-}
-
-const baseColor = (color) => {
-  return chroma(color).alpha(0.5).hex('rgba')
-}
+const opacities = [
+  0,
+  10,
+  20,
+  30,
+  40,
+  50,
+  60,
+  70,
+  80,
+  90,
+  100,
+]
 
 const mixColor = (color, opacity) => {
-  chroma(color).alpha(opacity / 10).hex('rgba')
+  return chroma(color).alpha(opacity * 0.1).rgba()
 }
 
-// exports
+/**
+ * Colors
+ */
 module.exports = ({addComponents, theme}) => {
   const options = theme('gutenberg.colors')
-  const opacities = generateOpacities()
 
-  const colors = _.map(options, (value, name) => ({
+  const colors = _.map(options, (color, name) => ({
     [`.has-${name}-color`]: {
-      color: value,
+      color,
     },
+
     [`.has-${name}-background-color`]: {
-      backgroundColor: value,
+      backgroundColor: color,
     },
+
     [`.has-${name}-background-color.has-background-dim`]: {
-      backgroundColor: baseColor(value),
-      zIndex: 10,
+      backgroundColor: color,
     },
   }))
 
-  const backgroundShades = _.map(options, (color, name) => {
-    opacities.map(opacity => ({
+  const shades = _.map(options, (color, name) => (
+    _.map(opacities, opacity => ({
       [`.has-${name}-background-color.has-background-dim-${opacity}`]: {
-        backgroundColor: mixColor(color, opacity),
+        backgroundColor: `rgba(${chroma(color).alpha(opacity * 0.01).rgba()})`,
         zIndex: 10,
       },
     }))
-  })
+  ))
 
   addComponents([
     colors,
-    backgroundShades,
+    ...shades,
   ])
 }

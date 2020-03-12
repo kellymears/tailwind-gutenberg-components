@@ -4,15 +4,16 @@ module.exports = ({ addComponents, theme }) => {
   /**
    * Tailwind Config Options
    */
-  const familyOpts = theme('gutenberg.fontFamily')
-  const sizeOpts = _.omit(theme('gutenberg.fontSizes'), 'wpGenerated')
-  const generatedSizeOpts = theme('gutenberg.fontSizes.wpGenerated')
+  const familyConfig = theme('gutenberg.typography.fontFamily')
+  const colorConfig = theme('gutenberg.typography.fontColor')
+  const sizeConfig = _.omit(theme('gutenberg.typography.fontSize'), 'generated')
+  const userScaleConfig = theme('gutenberg.fontSize.userScale')
 
   /**
    * Font Families
    */
-  const fonts = _.map(familyOpts, (value, key) => ({
-    [`.wp-blocks ${key}:not([class^="font-"])`]: {
+  const fonts = _.map(familyConfig, (value, key) => ({
+    [`${key}:not([class^="font-"])`]: {
       fontFamily: `${value.map(font => (` ${font}`))}`,
     },
   }))
@@ -20,8 +21,8 @@ module.exports = ({ addComponents, theme }) => {
   /**
    * Font Sizes
    */
-  const sizes = _.map(sizeOpts, (value, key) => ({
-    [`.wp-blocks ${key}:not([class^="font-"])`]: {
+  const sizes = _.map(sizeConfig, (value, key) => ({
+    [`${key}:not([class^="font-"])`]: {
       fontSize: value,
     },
   }))
@@ -29,9 +30,18 @@ module.exports = ({ addComponents, theme }) => {
   /**
    * WordPress Generated Font Sizes
    */
-  const generatedFontSizes = _.map(generatedSizeOpts, (value, key) => ({
-    [`.wp-blocks .has-${key}-font-size`]: {
+  const generatedFontSizes = _.map(userScaleConfig, (value, key) => ({
+    [`.has-${key}-font-size`]: {
       fontSize: value,
+    },
+  }))
+
+  /**
+   * Font Colors
+   */
+  const colors = _.map(colorConfig, (value, key) => ({
+    [`${key}:not([class^="has-"])`]: {
+      color: value,
     },
   }))
 
@@ -39,31 +49,30 @@ module.exports = ({ addComponents, theme }) => {
    * List styles
    */
   const listStyles = {
-    '.wp-blocks': {
-      [`ol:not([class^="wp-block-"]),
-        ol:not([class^="wp-block-"]) *`]: {
-        listStylePosition: 'inside',
-        listStyleType: theme('gutenberg.lists.orderedStyle'),
-      },
+    [`ol:not([class^="wp-block-"]) li,
+      ol:not([class^="wp-block-"]) li *,
+      ul:not([class^="wp-block-"]) li,
+      ul:not([class^="wp-block-"]) li *`]: {
+      paddingLeft: theme('gutenberg.lists.inset'),
+    },
 
-      [`ul:not([class^="wp-block-"]),
-        ul:not([class^="wp-block-"]) *`]: {
-        listStylePosition: 'inside',
-        listStyleType: theme('gutenberg.lists.unorderedStyle'),
-      },
+    [`ol:not([class^="wp-block-"]),
+      ol:not([class^="wp-block-"]) *`]: {
+      listStylePosition: 'inside',
+      listStyleType: theme('gutenberg.lists.orderedStyle'),
+    },
 
-      [`ol:not([class^="wp-block-"]) li,
-        ol:not([class^="wp-block-"]) li *,
-        ul:not([class^="wp-block-"]) li,
-        ul:not([class^="wp-block-"]) li *`]: {
-        paddingLeft: theme('gutenberg.lists.inset'),
-      },
+    [`ul:not([class^="wp-block-"]),
+      ul:not([class^="wp-block-"]) *`]: {
+      listStylePosition: 'inside',
+      listStyleType: theme('gutenberg.lists.unorderedStyle'),
     },
   }
 
   addComponents([
     fonts,
     sizes,
+    colors,
     generatedFontSizes,
     listStyles,
   ])

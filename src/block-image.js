@@ -1,5 +1,5 @@
 module.exports = ({ addComponents, theme }) => {
-  const specialAlignment = {
+  const specialAlignments = {
     '.wp-block-image.alignfull, .wp-block-image.alignwide': {
       paddingLeft: 0,
       paddingRight: 0,
@@ -21,8 +21,7 @@ module.exports = ({ addComponents, theme }) => {
 
       'img': {
         width: '100%',
-        paddingTop: theme('gutenberg.columnGap'),
-        paddingRight: theme('gutenberg.rowGap.default'),
+        paddingRight: theme('gutenberg.spacing.horizontal'),
       },
     },
   }
@@ -34,19 +33,16 @@ module.exports = ({ addComponents, theme }) => {
 
       'img': {
         width: '100%',
-        paddingTop: theme('gutenberg.columnGap'),
-        paddingLeft: theme('gutenberg.rowGap.default'),
+        paddingLeft: theme('gutenberg.spacing.horizontal'),
       },
     },
   }
 
   addComponents([
-    specialAlignment,
     alignLeft,
     alignRight,
   ])
 
-  theme('gutenberg.supports.wideAlignments') && (
-    addComponents(specialAlignment)
-  )
+  theme('gutenberg.supports.wideAlignments')
+    && addComponents(specialAlignments)
 }

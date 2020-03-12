@@ -1,3 +1,6 @@
+/**
+ * Grid
+ */
 const constructGridObject = () => {
   var gridTemplate = []
   var gridIteration = 2
@@ -6,36 +9,42 @@ const constructGridObject = () => {
     gridTemplate.push({
       'count': gridIteration,
       'selector': `&.has-${gridIteration}-columns`,
-    }) && gridIteration++
+    })
+
+    gridIteration++
   }
 
   return gridTemplate
 }
 
 module.exports = ({ addComponents, theme }) => {
+  const options = theme('gutenberg')
+  const colGap = options.spacing.horizontal
 
-  const screens = theme('gutenberg.screens')
-  const colGap = theme('gutenberg.columnGap')
   const gridTemplate = constructGridObject()
 
   const columns = gridTemplate.map(obj => ({
-    ':not(.wp-block-group)': {
+    [`div:not(.wp-block-group)`]: {
       '.wp-block-columns, .is-grid': {
         paddingLeft: colGap,
         paddingRight: colGap,
 
-        // you're the new grid
+        /**
+         * Prefer grid for supporting browsers.
+         */
         '@supports (display: grid)': {
           [obj.selector]: {
             display: 'grid',
-            [`@media (min-width: ${screens.md})`]: {
-              'grid-template-columns': `repeat(${obj.count}, 1fr)`,
+            [`@media (min-width: ${options.screens.md})`]: {
+              'grid-template-columns': `repeat(${obj.count}, minmax(0, 1fr))`,
             },
             'grid-column-gap': colGap,
           },
         },
 
-        // flex is jennifer aniston
+        /**
+         * Fallback to flex.
+         */
         '@supports not (display: grid)': {
           [obj.selector]: {
             display: 'flex',
@@ -49,20 +58,7 @@ module.exports = ({ addComponents, theme }) => {
     },
   }))
 
-  const group = {
-    '.wp-block-group': {
-      marginTop: 0,
-      marginBottom: 0,
-      paddingTop: theme('gutenberg.rowGap'),
-      paddingBottom: theme('gutenberg.rowGap'),
-      '.wp-block-columns': {
-        display: 'flex',
-      },
-    },
-  }
-
   addComponents([
     columns,
-    group,
   ])
 }

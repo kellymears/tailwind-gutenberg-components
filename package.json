@@ -1,6 +1,7 @@
 {
+  "name": "tailwind-gutenberg",
   "devDependencies": {
     "chroma-js": "2.0.3",
-    "tailwindcss": "^1.0.1"
+    "tailwindcss": "^1.2.0"
   }
 }
