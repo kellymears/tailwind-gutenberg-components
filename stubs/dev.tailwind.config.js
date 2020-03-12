@@ -705,5 +705,6 @@ module.exports = {
     require('./../src/block-video'),
     require('./../src/block-cover'),
     require('./../src/block-table'),
+    require('./../src/block-gallery'),
   ],
 }
