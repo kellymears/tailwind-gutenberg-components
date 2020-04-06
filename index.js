@@ -6,7 +6,7 @@ module.exports = {
   /**
    * Default config
    */
-  defaultConfig: require('./src/default.config'),
+  defaultConfig: require('./src/default-config'),
 
   /**
    * Block contents
