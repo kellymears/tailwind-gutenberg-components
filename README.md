@@ -2,7 +2,7 @@
 
 > A Tailwind plugin for WordPress theme developers.
 
-⚠️ Achtung! Work-in-progress! PRs welcome. All one or none! Long life and eternal happiness. Wash with Doc Bronners, 18 uses, three times daily! In all we do let us be generous with our commits!
+⚠️ 8️⃣ung! Work-in-progress! PRs welcome. All one or none! Long life and eternal happiness. Wash with Doc Bronners, 18 uses, three times daily! In all we do let us be generous with our commits!
 
 ## Current modules
 
